@@ -1,0 +1,55 @@
+package com.example.hasee.listview;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+
+public class myAdatper extends ArrayAdapter<String> {
+    private Context context;
+    private String[] news01;
+    private String[] news02;
+    private int[] image;
+    private LayoutInflater flater;
+
+
+    public myAdatper(Context context, int resource,String[] news01,String[] news02,int[] image) {
+        super(context,resource,news01);
+        this.context=context;
+        this.news01=news01;
+        this.news02=news02;
+        this.image=image;
+        flater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+    }
+    public int getCount(){
+        return news01.length;
+    }
+    public String getItem(int position){
+        return news01[position];
+    }
+    public long getItemID(int position){
+        return position;
+    }
+
+
+
+    public View getView(int position,View convertView,ViewGroup parent){
+        if(convertView==null){
+            convertView=flater.inflate(R.layout.forlsview,parent,false);
+        }
+        ImageView imageView=(ImageView)convertView.findViewById(R.id.image01);
+        imageView.getLayoutParams().height=150;
+        imageView.getLayoutParams().width=150;
+        imageView.setImageResource(image[position]);
+        TextView textView2=(TextView)convertView.findViewById(R.id.textView2);
+        textView2.setText(news02[position]);
+        TextView textView1=(TextView)convertView.findViewById(R.id.textView1);
+        textView1.setText(news01[position]);
+        return convertView;
+    }
+}
